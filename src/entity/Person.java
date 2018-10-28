@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.Objects;
+
 public class Person {
 
     private final String first, last, city, phone;
@@ -25,6 +27,22 @@ public class Person {
 
     public String getPhone() {
         return phone;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(first, person.first) &&
+                Objects.equals(last, person.last) &&
+                Objects.equals(city, person.city) &&
+                Objects.equals(phone, person.phone);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(first, last, city, phone);
     }
 
     @Override

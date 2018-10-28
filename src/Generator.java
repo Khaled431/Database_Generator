@@ -1,10 +1,17 @@
+import entity.Bar;
 import entity.Beer;
 import entity.Person;
+import properties.Shift;
+import relations.Employee;
+import relations.Item;
+import util.StringUtil;
+import util.TimeUtil;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.security.SecureRandom;
+import java.time.DayOfWeek;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -12,7 +19,7 @@ public class Generator {
 
     public static final SecureRandom SECURE_RANDOM;
 
-    public static final int NUMBER_OF_PEOPLE_TO_GEN = 100, NUM_BARS_TO_GEN = 15;
+    public static final int NUMBER_OF_PEOPLE_TO_GEN = 1000, NUM_BARS_TO_GEN = 15, NUMBER_EMPLOYEES_PER_BAR = 10;
 
     public static final String FIRST_NAMES_PATH;
     public static final List<String> FIRST_NAMES;
@@ -32,10 +39,12 @@ public class Generator {
 
 
     // Entities
+    public static final Shift[] SHIFTS;
     public static final Person[] PEOPLE;
+    public static final Bar[] BARS;
     public static final List<Beer> BEERS;
+    private static final Set<Person> EMPLOYEES;
     private static final List<String> BAR_NAMES;
-
 
     static {
         SECURE_RANDOM = new SecureRandom();
@@ -58,7 +67,27 @@ public class Generator {
         BAR_NAMES = new ArrayList<>();
 
         PEOPLE = new Person[NUMBER_OF_PEOPLE_TO_GEN];
+        BARS = new Bar[NUM_BARS_TO_GEN];
+
         BEERS = new ArrayList<>();
+        EMPLOYEES = new HashSet<>();
+
+        DayOfWeek[] dayOfWeeks = DayOfWeek.values();
+        SHIFTS = new Shift[dayOfWeeks.length];
+        for (int j = 0; j < SHIFTS.length; j++) {
+            DayOfWeek day = dayOfWeeks[j];
+
+            int startTime, endTime;
+            if (TimeUtil.isPrime(day)) { // we need two bartenders this day for 3 days
+                startTime = 9;
+                endTime = 3 + 24;
+            } else {
+                startTime = 16;
+                endTime = 24;
+            }
+
+            SHIFTS[j] = new Shift(startTime, endTime, day);
+        }
     }
 
     public static void main(String[] args) throws IOException {
@@ -71,12 +100,61 @@ public class Generator {
             PHONE_NUMBERS.remove(phoneCityElement.getKey());
 
             String[] nameSplit = name.split(" ");
-            PEOPLE[index] = new Person(nameSplit[0], nameSplit[1], phoneCityElement.getKey(), phoneCityElement.getValue());
+            PEOPLE[index] = new Person(nameSplit[0], nameSplit[1], phoneCityElement.getValue(), phoneCityElement.getKey());
         }
 
+        for (int index = 0; index < BARS.length; index++) {
+            String name = BAR_NAMES.remove(SECURE_RANDOM.nextInt(BAR_NAMES.size()));
+            Person owner = PEOPLE[SECURE_RANDOM.nextInt(PEOPLE.length)];
+
+            EMPLOYEES.add(owner);
+
+            int scheduleCount = 0;
+            List<Employee> employees = new ArrayList<>();
+            do { // Need ten bartenders daily, they cannot already work for another bar.
+                Person person = PEOPLE[SECURE_RANDOM.nextInt(PEOPLE.length)];
+                if (EMPLOYEES.contains(person)) {
+                    continue;
+                }
+
+                Shift barShift = SHIFTS[scheduleCount];
+
+                int startHour, endHour;
+                if (TimeUtil.isPrime(barShift.getDayOfWeek())) {
+                    int shift = employees.size() % 2;
+                    if (shift == 0) { // 1st person
+                        startHour = barShift.getStartHour();
+                        endHour = startHour + 8;
+                    } else { // 2nd person
+                        startHour = barShift.getStartHour() + 8;
+                        endHour = barShift.getEndHour();
+
+                        scheduleCount++;
+                    }
+                } else {
+                    startHour = barShift.getStartHour();
+                    endHour = barShift.getEndHour();
+
+                    scheduleCount++;
+                }
 
 
+                Employee employee = new Employee(person, name, new Shift(startHour, endHour, barShift.getDayOfWeek()), (SECURE_RANDOM
+                        .nextDouble() * 10.00) + 14.00);
 
+                EMPLOYEES.add(employee.getPerson());
+
+                employees.add(employee);
+            } while (employees.size() != NUMBER_EMPLOYEES_PER_BAR);
+
+            List<Item> inventory = new ArrayList<>();
+
+            BARS[index] = new Bar(name, owner, SHIFTS, employees.stream().toArray(Employee[]::new), inventory);
+        }
+
+        for (Bar bar : BARS) {
+            System.out.println(bar);
+        }
     }
 
     private static void loadData() throws IOException {
@@ -93,7 +171,7 @@ public class Generator {
         LAST_NAMES.addAll(Files.lines(lastNameFile.toPath()).collect(Collectors.toCollection(ArrayList::new)));
 
         while (FULL_NAMES.size() < NUMBER_OF_PEOPLE_TO_GEN) {
-            FULL_NAMES.add(capitalize(getRandElement(FIRST_NAMES) + " " + getRandElement(LAST_NAMES)));
+            FULL_NAMES.add(StringUtil.capitalize(getRandElement(FIRST_NAMES) + " " + getRandElement(LAST_NAMES)));
         }
 
         File njPhoneExtensions = new File(NJ_PHONE_EXTENSIONS);
@@ -141,21 +219,5 @@ public class Generator {
         return collection.stream().skip(SECURE_RANDOM.nextInt(collection.size())).findFirst().orElse(null);
     }
 
-    private static String capitalize(String str) {
-        str = str.toLowerCase();
-
-        StringBuilder buffer = new StringBuilder();
-
-        char ch = ' ';
-        for (int i = 0; i < str.length(); i++) {
-            if (ch == ' ' && str.charAt(i) != ' ')
-                buffer.append(Character.toUpperCase(str.charAt(i)));
-            else
-                buffer.append(str.charAt(i));
-            ch = str.charAt(i);
-        }
-
-        return buffer.toString().trim();
-    }
 
 }

@@ -24,4 +24,13 @@ public class Shift {
     public DayOfWeek getDayOfWeek() {
         return dayOfWeek;
     }
+
+    @Override
+    public String toString() {
+        return "Shift{" +
+                "startHour=" + startHour +
+                ", endHour=" + endHour +
+                ", dayOfWeek=" + dayOfWeek +
+                '}';
+    }
 }
