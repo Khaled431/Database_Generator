@@ -41,14 +41,19 @@ public class Generator {
     public static final HashMap<String, String> PHONE_NUMBERS;
 
     public static final String BEER_MANU_NAMES;
+    public static final String FOOD_NAMES_FILE;
+
     public static final String BAR_NAMES_FILE;
+    public static final Shift[] SHIFTS;
 
 
     // Entities
-    public static final Shift[] SHIFTS;
     public static final Person[] PEOPLE;
     public static final Bar[] BARS;
     public static final List<Beer> BEERS;
+    public static final List<String> FOOD;
+
+    // Relations
     private static final Set<Person> EMPLOYEES;
     private static final List<String> BAR_NAMES;
 
@@ -70,6 +75,7 @@ public class Generator {
         PHONE_NUMBERS = new HashMap<>();
 
         BEER_MANU_NAMES = "./data/beer_manu_names.txt";
+        FOOD_NAMES_FILE = "./data/bar_food.txt";
 
         BAR_NAMES_FILE = "./data/bar_names.txt";
         BAR_NAMES = new ArrayList<>();
@@ -78,6 +84,7 @@ public class Generator {
         BARS = new Bar[NUM_BARS_TO_GEN];
 
         BEERS = new ArrayList<>();
+        FOOD = new ArrayList<>();
         EMPLOYEES = new HashSet<>();
 
         DayOfWeek[] dayOfWeeks = DayOfWeek.values();
@@ -159,17 +166,22 @@ public class Generator {
 
             List<Item> inventory = new ArrayList<>();
             do {
-                Beer beer = getRandElement(BEERS);
+                String itemName;
+                if (SECURE_RANDOM.nextInt(3) == 1) {
+                    itemName = getRandElement(FOOD);
+                } else {
+                    itemName = getRandElement(BEERS).getName();
+                }
+
                 double cost = (SECURE_RANDOM.nextDouble() * 7.00) + 5.00;
                 int amount = SECURE_RANDOM.nextInt(9000) + NUM_MINIMUM_ITEM_AMOUNT;
 
-                Item item = new Item(beer.getName(), cost, amount);
+                Item item = new Item(itemName, cost, amount);
                 if (inventory.contains(item)) {
                     continue;
                 }
 
                 inventory.add(item);
-
             } while (inventory.size() < NUM_MINIMUM_INVENTORY_SIZE);
 
             Map.Entry<String, String> phoneCityElement = getRandElement(PHONE_NUMBERS.entrySet());
@@ -224,7 +236,6 @@ public class Generator {
             }
         }
 
-        TRANSACTIONS.forEach(System.out::println);
     }
 
     private static void loadData() throws IOException {
@@ -282,6 +293,12 @@ public class Generator {
             throw new IllegalStateException("Could not find file bar_names.txt");
 
         BAR_NAMES.addAll(Files.lines(barNames.toPath()).collect(Collectors.toList()));
+
+        File foodNames = new File(FOOD_NAMES_FILE);
+        if (!foodNames.exists())
+            throw new IllegalStateException("Food names could not be found.");
+
+        FOOD.addAll(Files.lines(foodNames.toPath()).collect(Collectors.toList()));
     }
 
 
