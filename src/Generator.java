@@ -4,6 +4,7 @@ import entity.Person;
 import properties.Shift;
 import relations.Employee;
 import relations.Item;
+import relations.Transaction;
 import util.StringUtil;
 import util.TimeUtil;
 
@@ -12,14 +13,19 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.security.SecureRandom;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Generator {
 
     public static final SecureRandom SECURE_RANDOM;
 
-    public static final int NUMBER_OF_PEOPLE_TO_GEN = 1000, NUM_BARS_TO_GEN = 15, NUMBER_EMPLOYEES_PER_BAR = 10;
+    public static final int NUMBER_OF_PEOPLE_TO_GEN = 1000, NUM_BARS_TO_GEN = 15, NUMBER_EMPLOYEES_PER_BAR = 10, NUM_MINIMUM_ITEM_AMOUNT = 1000,
+            NUM_MINIMUM_INVENTORY_SIZE = 50;
 
     public static final String FIRST_NAMES_PATH;
     public static final List<String> FIRST_NAMES;
@@ -45,6 +51,8 @@ public class Generator {
     public static final List<Beer> BEERS;
     private static final Set<Person> EMPLOYEES;
     private static final List<String> BAR_NAMES;
+
+    private static final List<Transaction> TRANSACTIONS;
 
     static {
         SECURE_RANDOM = new SecureRandom();
@@ -88,6 +96,8 @@ public class Generator {
 
             SHIFTS[j] = new Shift(startTime, endTime, day);
         }
+
+        TRANSACTIONS = new ArrayList<>();
     }
 
     public static void main(String[] args) throws IOException {
@@ -148,13 +158,73 @@ public class Generator {
             } while (employees.size() != NUMBER_EMPLOYEES_PER_BAR);
 
             List<Item> inventory = new ArrayList<>();
+            do {
+                Beer beer = getRandElement(BEERS);
+                double cost = (SECURE_RANDOM.nextDouble() * 7.00) + 5.00;
+                int amount = SECURE_RANDOM.nextInt(9000) + NUM_MINIMUM_ITEM_AMOUNT;
 
-            BARS[index] = new Bar(name, owner, SHIFTS, employees.stream().toArray(Employee[]::new), inventory);
+                Item item = new Item(beer.getName(), cost, amount);
+                if (inventory.contains(item)) {
+                    continue;
+                }
+
+                inventory.add(item);
+
+            } while (inventory.size() < NUM_MINIMUM_INVENTORY_SIZE);
+
+            Map.Entry<String, String> phoneCityElement = getRandElement(PHONE_NUMBERS.entrySet());
+            PHONE_NUMBERS.remove(phoneCityElement.getKey());
+
+            BARS[index] = new Bar(name, phoneCityElement.getValue(), phoneCityElement.getKey(), owner, SHIFTS,
+                    employees.stream().toArray(Employee[]::new), inventory);
         }
 
-        for (Bar bar : BARS) {
-            System.out.println(bar);
+
+        int targetTransSize = SECURE_RANDOM.nextInt(20000) + 1000;
+        while (TRANSACTIONS.size() < targetTransSize) {
+            Person person = getRandElement(List.of(PEOPLE));
+            boolean randomBar = SECURE_RANDOM.nextInt(10) == 1;
+            Bar bar;
+
+            if (randomBar) {
+                bar = getRandElement(List.of(BARS));
+            } else {
+                List<Bar> inCityBar = Stream.of(BARS).filter(b -> b.getCity().equals(person.getCity())).collect(Collectors.toList());
+                if (inCityBar.isEmpty()) {
+                    continue;
+                }
+                bar = getRandElement(inCityBar);
+            }
+
+            if (bar.getOwner().equals(person))
+                continue;
+
+            Employee employee = getRandElement(List.of(bar.getEmployees()));
+            if (employee.equals(bar.getEmployee(person))) {
+                continue;
+            }
+
+            int minutes = SECURE_RANDOM.nextInt(60);
+            int seconds = SECURE_RANDOM.nextInt(60);
+            int hour = SECURE_RANDOM.nextInt(employee.getShift().getEndHour()) + employee.getShift().getStartHour();
+            int day = employee.getShift().getDayOfWeek().getValue();
+            int month = SECURE_RANDOM.nextInt(12) + 1;
+            LocalDateTime localDateTime = LocalDate.parse("2018-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day)).atTime
+                    (0, minutes, seconds);
+
+            if (hour > 23) {
+                localDateTime = localDateTime.plusHours(hour - 23).plusDays(1);
+            } else {
+                localDateTime = localDateTime.plusHours(hour);
+            }
+
+            int numPurchases = SECURE_RANDOM.nextInt(3) + 1;
+            for (int index = 0; index < numPurchases; index++) {
+                TRANSACTIONS.add(new Transaction(bar, getRandElement(bar.getInventory()), person, employee, localDateTime.toInstant(ZoneOffset.UTC)));
+            }
         }
+
+        TRANSACTIONS.forEach(System.out::println);
     }
 
     private static void loadData() throws IOException {

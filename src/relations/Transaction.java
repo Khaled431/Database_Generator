@@ -8,14 +8,16 @@ import java.time.Instant;
 public class Transaction {
 
     private Bar bar;
-    private Item item;
+    private Employee employee;
     private Person person;
+    private Item item;
     private Instant instant;
 
-    public Transaction(Bar bar, Item item, Person person, Instant instant) {
+    public Transaction(Bar bar, Item item, Person person, Employee employee, Instant instant) {
         this.bar = bar;
         this.item = item;
         this.person = person;
+        this.employee = employee;
         this.instant = instant;
     }
 
@@ -33,5 +35,16 @@ public class Transaction {
 
     public Instant getInstant() {
         return instant;
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "bar=" + bar +
+                ", employee=" + employee +
+                ", person=" + person +
+                ", item=" + item +
+                ", instant=" + instant +
+                '}';
     }
 }
