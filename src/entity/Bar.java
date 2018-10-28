@@ -20,6 +20,7 @@ public class Bar {
     public Bar(String name, String city, String number, Person owner, Shift[] hoursOfOperation, Employee[] employees, List<Item> inventory) {
         this.name = name;
         this.city = city;
+        this.number = number;
         this.owner = owner;
         this.hoursOfOperation = hoursOfOperation;
         this.employees = employees;
@@ -32,6 +33,10 @@ public class Bar {
 
     public String getCity() {
         return city;
+    }
+
+    public String getNumber() {
+        return number;
     }
 
     public Person getOwner() {

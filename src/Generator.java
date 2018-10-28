@@ -2,16 +2,14 @@ import entity.Bar;
 import entity.Beer;
 import entity.Person;
 import properties.Shift;
-import relations.Employee;
-import relations.Frequents;
-import relations.Item;
-import relations.Transaction;
+import relations.*;
 import util.StringUtil;
 import util.TimeUtil;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.security.SecureRandom;
 import java.time.DayOfWeek;
@@ -62,6 +60,8 @@ public class Generator {
     private static final List<Transaction> TRANSACTIONS;
     private static final List<Frequents> FREQUENTS;
 
+    private static final List<Likes> LIKES;
+
     static {
         SECURE_RANDOM = new SecureRandom();
 
@@ -89,6 +89,7 @@ public class Generator {
         BEERS = new ArrayList<>();
         FOOD = new ArrayList<>();
         EMPLOYEES = new HashSet<>();
+        LIKES = new ArrayList<>();
 
         DayOfWeek[] dayOfWeeks = DayOfWeek.values();
         SHIFTS = new Shift[dayOfWeeks.length];
@@ -113,7 +114,67 @@ public class Generator {
 
     public static void main(String[] args) throws IOException {
         loadData();
+        populateData();
+        exportData();
 
+    }
+
+    private static void exportData() throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(new File("./export/out.txt")));
+
+        for (Person person : PEOPLE) {
+            writer.write("INSERT INTO people (first_name, last_name, city, phone) VALUES ('" + person.getFirst() + "','" + person.getLast() + "','"
+                    + person.getCity() + "','" + person.getPhone() + "');\n");
+        }
+
+        writer.flush();
+
+        for (Bar bar : BARS) {
+            writer.write("INSERT INTO bars (name, city, phone_number, owner_first, owner_last) VALUES ('" + bar.getName() +
+                    "','" + bar.getCity() + "','" + bar.getNumber() + "','" + bar.getOwner().getFirst() + "','" + bar.getOwner().getLast() + "');\n");
+
+            for (Employee employee : bar.getEmployees()) {
+                writer.write("INSERT INTO employees (bar_name, first_name, last_name, shift_hour_start, shift_hour_end, shift_day_of_week) " +
+                        "VALUES ('" + bar.getName() + "','" + employee.getPerson().getFirst() + "'," + employee.getPerson().getLast() + "','" +
+                        employee.getShift().getStartHour() + "'," + employee.getShift().getEndHour() + ",'" + employee.getShift().getDayOfWeek() +
+                        "');\n");
+            }
+
+            for (Item item : bar.getInventory()) {
+                writer.write("INSERT INTO inventory (bar_name, item_name, item_cost, item_count) VALUES ('" + bar.getName() + "','" +
+                        item.getName() + "'," + item.getCost() + "," + item.getAmount() + ");\n");
+            }
+        }
+        writer.flush();
+
+        for (Likes like : LIKES) {
+            writer.write("INSERT INTO likes (first_name, last_name, item_name) VALUES ('" + like.getPerson().getFirst() + "','" +
+                    like.getPerson().getLast() + "','" + like.getItem() + "');\n");
+        }
+        writer.flush();
+
+        for (int index = 0; index < TRANSACTIONS.size(); index++) {
+            Transaction transaction = TRANSACTIONS.get(index);
+            writer.write("INSERT INTO transactions (id_transaction, bar_name, first_name, last_name, employee_first_name, employee_last_name," +
+                    "item_name, timestamp) VALUES (" + index + ",'" + transaction.getBar().getName() + "','" + transaction.getPerson().getFirst() +
+                    "','" + transaction.getPerson().getLast() + "','" + transaction.getEmployee().getPerson().getFirst() + "','" + transaction
+                    .getEmployee().getPerson().getLast() + "','" + transaction.getItem().getName() + "'," + transaction.getInstant().getEpochSecond
+                    () + ");\n");
+
+
+            writer.flush();
+        }
+
+        for (Frequents frequents : FREQUENTS) {
+            writer.write("INSERT INTO frequents (bar_name, first_name, last_name) VALUES('" + frequents.getBar().getName() + "','" +
+                    frequents.getPerson().getFirst() + "','" + frequents.getPerson().getLast() + "');\n");
+        }
+        writer.flush();
+
+        writer.close();
+    }
+
+    private static void populateData() {
         for (int index = 0; index < PEOPLE.length; index++) {
             String name = getRandElement(FULL_NAMES);
             Map.Entry<String, String> phoneCityElement = getRandElement(PHONE_NUMBERS.entrySet());
@@ -252,7 +313,21 @@ public class Generator {
             FREQUENTS.add(frequents);
         });
 
-       // FREQUENTS.forEach(System.out::println);
+        while (LIKES.size() < NUM_MINIMUM_ITEM_AMOUNT) {
+            Person person = getRandElement(List.of(PEOPLE));
+            String itemName;
+            if (SECURE_RANDOM.nextInt(3) == 1) {
+                itemName = getRandElement(FOOD);
+            } else {
+                itemName = getRandElement(BEERS).getName();
+            }
+
+            Likes like = new Likes(person, itemName);
+            if (LIKES.contains(like))
+                continue;
+
+            LIKES.add(like);
+        }
     }
 
     private static void loadData() throws IOException {

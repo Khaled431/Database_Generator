@@ -33,6 +33,10 @@ public class Transaction {
         return person;
     }
 
+    public Employee getEmployee() {
+        return employee;
+    }
+
     public Instant getInstant() {
         return instant;
     }
