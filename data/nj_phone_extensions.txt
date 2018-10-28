@@ -1,0 +1,36 @@
+Atlantic City	609
+Bayonne	551
+Belleville	613
+Bloomfield	973
+Camden	609
+Clifton	862
+East Brunswick	848
+East Orange	862
+Edison	848
+Elizabeth	908
+Fair Lawn	551
+Fort Lee	201
+Hackensack	551
+Hoboken	201
+Irvington	862
+Jersey City	551
+Kearny	551
+Lakewood	303
+Linden	908
+Long Branch	908
+New Brunswick	908
+Newark	973
+North Bergen	201
+Orange	714
+Passaic	973
+Paterson	973
+Perth Amboy	908
+Plainfield	908
+Teaneck	201
+Toms River	908
+Trenton	609
+Union	815
+Union City	551
+Vineland	609
+Wayne	862
+West New York	201
