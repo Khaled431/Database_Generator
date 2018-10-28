@@ -3,6 +3,7 @@ import entity.Beer;
 import entity.Person;
 import properties.Shift;
 import relations.Employee;
+import relations.Frequents;
 import relations.Item;
 import relations.Transaction;
 import util.StringUtil;
@@ -10,6 +11,7 @@ import util.TimeUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.security.SecureRandom;
 import java.time.DayOfWeek;
@@ -58,6 +60,7 @@ public class Generator {
     private static final List<String> BAR_NAMES;
 
     private static final List<Transaction> TRANSACTIONS;
+    private static final List<Frequents> FREQUENTS;
 
     static {
         SECURE_RANDOM = new SecureRandom();
@@ -105,6 +108,7 @@ public class Generator {
         }
 
         TRANSACTIONS = new ArrayList<>();
+        FREQUENTS = new ArrayList<>();
     }
 
     public static void main(String[] args) throws IOException {
@@ -192,7 +196,7 @@ public class Generator {
         }
 
 
-        int targetTransSize = SECURE_RANDOM.nextInt(20000) + 1000;
+        int targetTransSize = SECURE_RANDOM.nextInt(40000) + 1000;
         while (TRANSACTIONS.size() < targetTransSize) {
             Person person = getRandElement(List.of(PEOPLE));
             boolean randomBar = SECURE_RANDOM.nextInt(10) == 1;
@@ -236,6 +240,19 @@ public class Generator {
             }
         }
 
+        Map<Frequents, Integer> FREQUENCY_MAP = new HashMap<>();
+        for (Transaction transaction : TRANSACTIONS) {
+            Frequents frequents = new Frequents(transaction.getBar(), transaction.getPerson());
+            FREQUENCY_MAP.put(frequents, 1 + FREQUENCY_MAP.getOrDefault(frequents, 0));
+        }
+
+        FREQUENCY_MAP.forEach((frequents, integer) -> {
+            if (integer < 5)
+                return;
+            FREQUENTS.add(frequents);
+        });
+
+       // FREQUENTS.forEach(System.out::println);
     }
 
     private static void loadData() throws IOException {
