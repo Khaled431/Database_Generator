@@ -1,14 +1,14 @@
 Ace of Clubs
-The Admiral's Arms
+The Admiral\'s Arms
 The Admiral Benbow Inn
 The Aidensfield Arms
 The Aigburth Arms
 Alibi Bar
 The Alibi Room
 The Anchor
-The Angler's Rest
+The Angler\'s Rest
 The Archer
-Archie Bunker's Place
+Archie Bunker\'s Place
 The Armada Room
 The Bada Bing
 The Ballroom
@@ -16,7 +16,7 @@ The Bamboo Lounge
 The Bang Bang Bar
 The Bannered Mare
 The Bee and Barb
-Bellefleur's Bar and Grill
+Bellefleur\'s Bar and Grill
 The Bigger Jigger
 Black Horse
 The Black Lion
@@ -26,10 +26,10 @@ Blue Boar Inn
 The Blue Oyster Bar
 The Blue Parrot
 Bo Ling Chop Suey Palace
-The Boar's Head
-The Boar's Nest
+The Boar\'s Head
+The Boar\'s Nest
 The Boatman
-Bob's Country Bunker
+Bob\'s Country Bunker
 Bodarks Bus Stop Restaurant
 Boobies
 The Boom Boom Room
@@ -42,19 +42,19 @@ The Broken Drum/The Mended Drum
 Broken Keel Tavern
 The Broken Stool
 The Bronze
-Broome's
-The Buck's Head Inn
+Broome\'s
+The Buck\'s Head Inn
 The Bull
 Bunnys
 The Butchers Arms
 Café René
-Callahan's Place
+Callahan\'s Place
 Candlehearth Hall
 The Cap & Bell
 The Cat & Fiddle
 Central Perk
-Charlie's
-Charlie's
+Charlie\'s
+Charlie\'s
 Chatsubo
 Cheers
 Chez Quis
@@ -65,28 +65,28 @@ Club Pluto
 Club Sugar Ray
 Cockatoo Inn
 Cocktails and Dreams
-Cohan's
+Cohan\'s
 Colonial Taphouse
-Cooper's
+Cooper\'s
 Copa
 Copacabana
 Corrado Italian Bistro
-The Count's Arms
+The Count\'s Arms
 Crab Shack
 The Crab Shed
 The Crazy Cock
 The Crazy Horse
 The Crow & Crown
 The Crown
-The Crow's Nest
-Daddy Crab Leg's Crab Shack
+The Crow\'s Nest
+Daddy Crab Leg\'s Crab Shack
 Dagmar
 Dal Riata
-De Rossi's Wine Bar
-Dead Man's Drink
+De Rossi\'s Wine Bar
+Dead Man\'s Drink
 Deville
 Dexter Lake Club
-Dino's Bar and Grill
+Dino\'s Bar and Grill
 The Dog and Dart
 Dog And Duck
 The Dog and Gun
@@ -102,7 +102,7 @@ The Drunken Dragon Inn
 The Drunken Huntsman
 Dugout Inn
 The Duke Of Burgundy
-Duke's Pub
+Duke\'s Pub
 The Earl Of Osbourne
 Eden Hall
 Electric Psychedelic Pussycat Swingers Club
@@ -115,33 +115,33 @@ The Feathers
 The Feathers
 The Feed Bag
 The Fiesty Goat Pub
-The Fisherman's Arms
-Fitzgerald's
+The Fisherman\'s Arms
+Fitzgerald\'s
 The Five Claws Lodge
-Flanagan's Cocktails & Dreams
-Flanahan's Hole
+Flanagan\'s Cocktails & Dreams
+Flanahan\'s Hole
 The Flowers of Gold
 The Flowing Bowl
 The Flying Horse
 The Flying Swan
 The Foaming Flask
-Foley's
+Foley\'s
 Fool and Bladder
 Fortune Casino
 Founding Fathers
 Four Shields Tavern
 Free the Paedos
-Friendsy's
+Friendsy\'s
 Frostfruit Inn
 The Frozen Hearth
-Gallow's End Tavern
+Gallow\'s End Tavern
 The Garrison
-Gary's Old Towne Tavern
-Gaston's
+Gary\'s Old Towne Tavern
+Gaston\'s
 Gateway Inn
 The Gentleman Loser
 The George III
-Glenister's
+Glenister\'s
 The Globe and Anchor
 The Goat
 The Goat and Compasses
@@ -149,20 +149,20 @@ The Gold Room at the Overlook Hotel
 The Golden Perch
 The Grapes
 The Grasshopper
-Greely's
+Greely\'s
 The Green Dragon in Hobbiton
 The Green Man
 The Grey Mare
 The Griffin
-Grilby's
+Grilby\'s
 The Grind & Jolt Cafe
-Gus's Galaxy Grill
+Gus\'s Galaxy Grill
 The Hand & Racquet, East Cheam
 The Hand of Glory
 The Hanged Man
-Harry Hope's Saloon
+Harry Hope\'s Saloon
 The Hip Joint
-The Hog's Head
+The Hog\'s Head
 The Horse & Groom, Cottington
 The Hound Pits Pub
 The Ink & Paint Club
@@ -171,17 +171,17 @@ Inn of the Last Home
 The Intersection
 The Iron Horse
 The Ivy Bush
-Jack Rabbit Slim's
-Jack's Crocodile Bar
-Jenny's
+Jack Rabbit Slim\'s
+Jack\'s Crocodile Bar
+Jenny\'s
 The Jockey
-Joe's
-John McRory's Place
-Kadie's Club Pecos
-Kavanagh's Irish Pub
+Joe\'s
+John McRory\'s Place
+Kadie\'s Club Pecos
+Kavanagh\'s Irish Pub
 The Kebab & Calculator
-Kelcy's
-Kennedy's
+Kelcy\'s
+Kennedy\'s
 The King and Queen Tavern
 The Kit Kat Klub
 Korova Milk Bar
@@ -190,90 +190,90 @@ The Last Chance Saloon
 The Last Resort
 The Leaky Cauldron
 The Learned Goat
-Levy's
+Levy\'s
 The Lion and Unicorn
-The Lizard's Head
+The Lizard\'s Head
 The Lobo
 The Lock
 The Loft
 The Long Branch Saloon
 The Lord Nelson
 The Lost Lady Saloon
-Louie's
+Louie\'s
 Low Point
 Lucky Lockup
 Lusty Leopard
 LUX
-Maccadam's Old Oil House
-MacLaren's Pub
-MacLaren's Pub
+Maccadam\'s Old Oil House
+MacLaren\'s Pub
+MacLaren\'s Pub
 Mad Dog Saloon
 The Maidenhead
 The Malt Shovel
-Mama Chow's Fine Dining
-Mancini's Family Restaurant
-Maxwell's Nightclub
-McAnally's
-Mickey's
-McGinty's
-McGinty's
-McGinty's
-Meibeyer's
-Merlotte's Bar and Grill
-Mickey Finn's Palace
+Mama Chow\'s Fine Dining
+Mancini\'s Family Restaurant
+Maxwell\'s Nightclub
+McAnally\'s
+Mickey\'s
+McGinty\'s
+McGinty\'s
+McGinty\'s
+Meibeyer\'s
+Merlotte\'s Bar and Grill
+Mickey Finn\'s Palace
 Midnight Bell
 The Midnight Star
 Milk
-Milliway's
+Milliway\'s
 Mr. Pubbs
-Moe's Tavern
+Moe\'s Tavern
 The Mohune Arms
 The Monkey Bar
 The Moon Under Water
 The Moonrakers
-Mos Eisley cantina, aka "Chalmun's Cantina"
+Mos Eisley cantina, aka "Chalmun\'s Cantina"
 The Mucky Duck
-Muggy's
+Muggy\'s
 Mulberry Street Bar
-Munden's Bar
+Munden\'s Bar
 The Mayhew
 Mystic Grill
-The Nag's Head
+The Nag\'s Head
 New Found Out
 New York Bar
 Night Spot
-Noah's Bar
+Noah\'s Bar
 The Oak and Crosier
 The Oblivion Bar
 The Old Haunt
 The Old Pink Dog
 Old Prospector Saloon
 The Orange Tree
-O'Malley's
-O'Malley's Bar
+O'Malley\'s
+O'Malley\'s Bar
 P3
-Paddy's Pub
+Paddy\'s Pub
 Palace Saloon
 The Peach Pit
 Pedro McKinnon
 The Pie Hole
 The Pig and Whistle
-The Pilgrim's Rest
+The Pilgrim\'s Rest
 The Place
 Playaz Club
 The Plot and Plaster
 The Plumbers Arms
 Poison
 The Pool Hall
-Poor Richard's
-Porky's
+Poor Richard\'s
+Porky\'s
 The Prancing Pony
 The Punch Tavern
 The Purple Pit
 Puzzles
-Quark's
+Quark\'s
 The Queen Victoria
-The Queen's Haemorrhoids
+The Queen\'s Haemorrhoids
 The Rabennest
 The Ragged Flagon
 The Railway Arms
@@ -282,20 +282,20 @@ The Raven
 The Red Boot Pub
 The Red Pony
 The Regal Beagle
-Rick's Café Américain
-Rolliver's Inn
-Romanoff's
+Rick\'s Café Américain
+Rolliver\'s Inn
+Romanoff\'s
 The Rose & Crown
 The Rose & Thorn
-Rosie's Bar
+Rosie\'s Bar
 Roulette
 Rovers Return Inn
-Rowlf's Tavern
+Rowlf\'s Tavern
 The Rusty Anchor
-St. Elmo's Bar
-Salieri's Bar
+St. Elmo\'s Bar
+Salieri\'s Bar
 Salty Sailor Tavern
-Samoan Joe's
+Samoan Joe\'s
 Sandbox
 SaxonwoldShebeen
 Scarlet Raven Tavern
@@ -317,11 +317,11 @@ Snakehole Lounge
 The Snug
 The Sole Regret
 The Spotted Dog
-Stan Mikita's Donuts
+Stan Mikita\'s Donuts
 Starlight Roof, The Green Lantern
 Steinway Beer Garden
 Stonefire Tavern
-Stone's Throw/Scorched Bone/Setting Sun
+Stone\'s Throw/Scorched Bone/Setting Sun
 SU Bar
 The Swan
 The Swan & Paedo
@@ -339,22 +339,22 @@ The Three Sisters' Inn
 Thunderbrew Distillery
 Titty Twister
 Titty Typhoon
-Torchy's
+Torchy\'s
 Trees Lounge
 The Tropicana
 Underworld Tavern
-Vardi's
+Vardi\'s
 The Venusville Bar
 Verdant
 Very Cool Secret Bar
 Vesuvio
 The Vigilante
-Volpe's
+Volpe\'s
 The Vulgar Unicorn
 The Wakeley Arms
 Wandin Valley RSL
 Weatherfield Arms
-Welsh's Bar
+Welsh\'s Bar
 West Weald Inn
 The Whippet Inn
 The White Hart
@@ -367,7 +367,7 @@ Windpeak Inn
 The Winking Skeever
 Wonder Bar
 The Woolpack
-World's End Tavern
+World\'s End Tavern
 Wurstbraterei
 Y Deri Arms
 The Yellow Flag

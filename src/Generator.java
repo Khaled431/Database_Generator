@@ -135,7 +135,7 @@ public class Generator {
 
             for (Employee employee : bar.getEmployees()) {
                 writer.write("INSERT INTO employees (bar_name, first_name, last_name, shift_hour_start, shift_hour_end, shift_day_of_week) " +
-                        "VALUES ('" + bar.getName() + "','" + employee.getPerson().getFirst() + "'," + employee.getPerson().getLast() + "','" +
+                        "VALUES ('" + bar.getName() + "','" + employee.getPerson().getFirst() + "','" + employee.getPerson().getLast() + "','" +
                         employee.getShift().getStartHour() + "'," + employee.getShift().getEndHour() + ",'" + employee.getShift().getDayOfWeek() +
                         "');\n");
             }
