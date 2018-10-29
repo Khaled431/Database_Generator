@@ -3,12 +3,13 @@ package relations;
 import java.util.Objects;
 
 public class Item {
-    private final String name;
+    private final String bar, name;
     private final double cost;
 
     private int amount;
 
-    public Item(String name, double cost, int amount) {
+    public Item(String bar, String name, double cost, int amount) {
+        this.bar = bar;
         this.name = name;
         this.cost = cost;
         this.amount = amount;
@@ -39,14 +40,13 @@ public class Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
-        return Double.compare(item.cost, cost) == 0 &&
+        return Objects.equals(bar, item.bar) &&
                 Objects.equals(name, item.name);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(name, cost);
+        return Objects.hash(bar, name);
     }
 
     @Override

@@ -177,6 +177,8 @@ public class Generator {
     private static void populateData() {
         for (int index = 0; index < PEOPLE.length; index++) {
             String name = getRandElement(FULL_NAMES);
+            FULL_NAMES.remove(name);
+
             Map.Entry<String, String> phoneCityElement = getRandElement(PHONE_NUMBERS.entrySet());
 
             PHONE_NUMBERS.remove(phoneCityElement.getKey());
@@ -241,7 +243,7 @@ public class Generator {
                 double cost = (SECURE_RANDOM.nextDouble() * 7.00) + 5.00;
                 int amount = SECURE_RANDOM.nextInt(9000) + NUM_MINIMUM_ITEM_AMOUNT;
 
-                Item item = new Item(itemName, cost, amount);
+                Item item = new Item(name, itemName, cost, amount);
                 if (inventory.contains(item)) {
                     continue;
                 }
@@ -309,6 +311,8 @@ public class Generator {
 
         FREQUENCY_MAP.forEach((frequents, integer) -> {
             if (integer < 5)
+                return;
+            if (FREQUENTS.contains(frequents))
                 return;
             FREQUENTS.add(frequents);
         });
