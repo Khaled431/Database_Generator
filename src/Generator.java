@@ -133,6 +133,11 @@ public class Generator {
             writer.write("INSERT INTO bars (name, city, phone_number, owner_first, owner_last) VALUES ('" + bar.getName() +
                     "','" + bar.getCity() + "','" + bar.getNumber() + "','" + bar.getOwner().getFirst() + "','" + bar.getOwner().getLast() + "');\n");
 
+            for (Shift shift : SHIFTS) {
+                writer.write("INSERT INTO hours (bar_name, day_of_week, hour_start, hour_end) VALUES ('"
+                        + bar.getName() + "','" + shift.getDayOfWeek() + "'," + shift.getStartHour() + "," + shift.getEndHour() + ");\n");
+            }
+
             for (Employee employee : bar.getEmployees()) {
                 writer.write("INSERT INTO employees (bar_name, first_name, last_name, shift_hour_start, shift_hour_end, shift_day_of_week) " +
                         "VALUES ('" + bar.getName() + "','" + employee.getPerson().getFirst() + "','" + employee.getPerson().getLast() + "','" +
